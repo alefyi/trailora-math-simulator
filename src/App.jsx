@@ -179,8 +179,6 @@ function App() {
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
               <XAxis 
                 dataKey="age" 
-                type="number"
-                domain={['dataMin', 'dataMax']}
                 stroke="#94a3b8" 
                 tick={{ fill: '#94a3b8', fontSize: 12 }}
                 tickMargin={10}
