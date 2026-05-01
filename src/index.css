@@ -224,6 +224,55 @@ h2 {
   background: rgba(255, 255, 255, 0.2);
 }
 
+.equations-panel {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--panel-border);
+}
+
+.equations-panel h3 {
+  font-size: 1.125rem;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.equation-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.equation-card {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.equation-card h4 {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.equation-card code {
+  display: block;
+  font-family: 'Inter', monospace;
+  font-size: 0.75rem;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.equation-card p {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
 /* Mobile Optimization */
 @media (max-width: 768px) {
   body {
@@ -250,7 +299,8 @@ h2 {
     padding: 16px;
   }
 
-  .stats-grid {
+  .stats-grid,
+  .equation-grid {
     grid-template-columns: 1fr;
     gap: 12px;
   }

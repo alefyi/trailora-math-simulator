@@ -174,30 +174,31 @@ function App() {
           </div>
         </div>
 
-        <div className="chart-container" style={{ width: '100%', overflowX: 'auto' }}>
-            <LineChart width={800} height={400} data={data} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+        <div className="chart-container" style={{ width: '100%', height: '400px', position: 'relative', minHeight: '400px' }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={data} margin={{ top: 20, right: 10, left: 0, bottom: 20 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
               <XAxis 
                 dataKey="age" 
                 stroke="#94a3b8" 
-                tick={{ fill: '#94a3b8', fontSize: 12 }}
+                tick={{ fill: '#94a3b8', fontSize: 10 }}
                 tickMargin={10}
                 minTickGap={20}
               />
               <YAxis 
                 yAxisId="left"
                 stroke="#94a3b8" 
-                tick={{ fill: '#94a3b8', fontSize: 12 }}
+                tick={{ fill: '#94a3b8', fontSize: 10 }}
                 tickFormatter={formatCurrency}
-                width={80}
+                width={50}
               />
               <YAxis 
                 yAxisId="right"
                 orientation="right"
                 stroke="#ef4444" 
-                tick={{ fill: '#ef4444', fontSize: 12 }}
+                tick={{ fill: '#ef4444', fontSize: 10 }}
                 tickFormatter={formatCurrency}
-                width={80}
+                width={50}
               />
               <RechartsTooltip content={<CustomTooltip />} />
               
@@ -221,6 +222,28 @@ function App() {
                 activeDot={{ r: 4, fill: '#ef4444', stroke: '#7f1d1d', strokeWidth: 2 }}
               />
             </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="equations-panel">
+          <h3>Mathematical Flow</h3>
+          <div className="equation-grid">
+            <div className="equation-card">
+              <h4>Pre-Retirement Accumulation</h4>
+              <code>Balance = (Balance + Monthly Contribution) × (1 + Monthly Growth Rate)</code>
+              <p>Applied monthly until Retirement Age.</p>
+            </div>
+            <div className="equation-card">
+              <h4>Retirement Decumulation</h4>
+              <code>Balance = Max(0, (Balance - Monthly Withdrawal) × (1 + Effective Growth Rate))</code>
+              <p>Where Effective Growth Rate is <strong>{useBuggedMath ? 'Annual Growth × 0.4 / 12' : 'Annual Growth / 12'}</strong>.</p>
+            </div>
+            <div className="equation-card">
+              <h4>Withdrawal Inflation</h4>
+              <code>Annual Withdrawal = Previous Year Withdrawal × (1 + Inflation Rate)</code>
+              <p>Initial withdrawal is <strong>{inputs.withdrawalRate}%</strong> of the portfolio balance at retirement.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
