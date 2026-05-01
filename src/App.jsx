@@ -174,9 +174,8 @@ function App() {
           </div>
         </div>
 
-        <div className="chart-container" style={{ minHeight: '400px', width: '100%', height: '400px' }}>
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+        <div className="chart-container" style={{ width: '100%', overflowX: 'auto' }}>
+            <LineChart width={800} height={400} data={data} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
               <XAxis 
                 dataKey="age" 
@@ -203,7 +202,6 @@ function App() {
                 width={80}
               />
               <RechartsTooltip content={<CustomTooltip />} />
-              <ReferenceLine yAxisId="left" x={inputs.retirementAge} stroke="#f59e0b" strokeDasharray="3 3" label={{ position: 'top', value: 'Retirement', fill: '#f59e0b', fontSize: 12 }} />
               
               <Line 
                 yAxisId="left"
@@ -225,7 +223,6 @@ function App() {
                 activeDot={{ r: 4, fill: '#ef4444', stroke: '#7f1d1d', strokeWidth: 2 }}
               />
             </LineChart>
-          </ResponsiveContainer>
         </div>
       </div>
     </div>
