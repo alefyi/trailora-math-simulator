@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
-import { Calculator, AlertTriangle } from 'lucide-react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend } from 'recharts';
+import { Calculator, AlertTriangle, FunctionSquare } from 'lucide-react';
 import { generateProjectionData } from './lib/math';
 
 function App() {
@@ -201,8 +201,10 @@ function App() {
                 width={50}
               />
               <RechartsTooltip content={<CustomTooltip />} />
+              <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize: '12px', color: '#94a3b8' }} />
               
               <Line 
+                name="Portfolio Balance"
                 yAxisId="left"
                 type="monotone" 
                 dataKey="balance" 
@@ -212,6 +214,7 @@ function App() {
                 activeDot={{ r: 6, fill: '#3b82f6', stroke: '#1e3a8a', strokeWidth: 2 }}
               />
               <Line 
+                name="Annual Withdrawal"
                 yAxisId="right"
                 type="monotone" 
                 dataKey="withdrawal" 
@@ -226,22 +229,27 @@ function App() {
         </div>
 
         <div className="equations-panel">
-          <h3>Mathematical Flow</h3>
+          <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><FunctionSquare size={20} color="#10b981" /> Computational Flow</h3>
           <div className="equation-grid">
             <div className="equation-card">
-              <h4>Pre-Retirement Accumulation</h4>
-              <code>Balance = (Balance + Monthly Contribution) × (1 + Monthly Growth Rate)</code>
-              <p>Applied monthly until Retirement Age.</p>
+              <h4>Phase I: Accumulation [t &lt; Retire Age]</h4>
+              <code>B<sub>t</sub> = (B<sub>t-1</sub> + C<sub>m</sub>) × (1 + r<sub>m</sub>)</code>
+              <p>Where <code>B</code> is the running balance, <code>C<sub>m</sub></code> is the monthly contribution, and <code>r<sub>m</sub></code> is the baseline monthly growth yield.</p>
             </div>
             <div className="equation-card">
-              <h4>Retirement Decumulation</h4>
-              <code>Balance = Max(0, (Balance - Monthly Withdrawal) × (1 + Effective Growth Rate))</code>
-              <p>Where Effective Growth Rate is <strong>{useBuggedMath ? 'Annual Growth × 0.4 / 12' : 'Annual Growth / 12'}</strong>.</p>
+              <h4>Initial Decumulation Target</h4>
+              <code>W<sub>0</sub> = B<sub>Retirement</sub> × w<sub>rate</sub></code>
+              <p>Calculates the initial Year 1 baseline withdrawal (<code>W<sub>0</sub></code>) as a strict percentage of the exact portfolio balance at retirement.</p>
             </div>
             <div className="equation-card">
-              <h4>Withdrawal Inflation</h4>
-              <code>Annual Withdrawal = Previous Year Withdrawal × (1 + Inflation Rate)</code>
-              <p>Initial withdrawal is <strong>{inputs.withdrawalRate}%</strong> of the portfolio balance at retirement.</p>
+              <h4>Phase II: Decumulation [t &ge; Retire Age]</h4>
+              <code>B<sub>t</sub> = Max(0, (B<sub>t-1</sub> - W<sub>m</sub>) × (1 + r<sub>eff</sub>))</code>
+              <p>Effective Growth Rate (<code>r<sub>eff</sub></code>) is <strong>{useBuggedMath ? 'r_m × 0.4' : 'r_m'}</strong>. <code>Max(0)</code> acts as the absolute depletion floor safeguard.</p>
+            </div>
+            <div className="equation-card">
+              <h4>Inflation Vector Mapping</h4>
+              <code>W<sub>year</sub> = W<sub>year-1</sub> × (1 + i)</code>
+              <p>Applies compounding inflation (<code>i</code>) annually strictly on the retirement anniversary month to scale the living withdrawal distribution.</p>
             </div>
           </div>
         </div>

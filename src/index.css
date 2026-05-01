@@ -238,7 +238,7 @@ h2 {
 
 .equation-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
 }
 
@@ -289,13 +289,11 @@ h2 {
 
   .sidebar {
     width: 100%;
-    order: 2;
     padding: 16px;
   }
 
   .main-stage {
     width: 100%;
-    order: 1;
     padding: 16px;
   }
 
