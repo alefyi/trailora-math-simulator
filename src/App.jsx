@@ -201,7 +201,7 @@ function App() {
                 width={80}
               />
               <RechartsTooltip content={<CustomTooltip />} />
-              <ReferenceLine x={inputs.retirementAge} stroke="#f59e0b" strokeDasharray="3 3" label={{ position: 'top', value: 'Retirement', fill: '#f59e0b', fontSize: 12 }} />
+              <ReferenceLine yAxisId="left" x={inputs.retirementAge} stroke="#f59e0b" strokeDasharray="3 3" label={{ position: 'top', value: 'Retirement', fill: '#f59e0b', fontSize: 12 }} />
               
               <Line 
                 yAxisId="left"
