@@ -247,6 +247,7 @@ h2 {
   border: 1px solid rgba(255, 255, 255, 0.05);
   padding: 16px;
   border-radius: 12px;
+  overflow: hidden;
 }
 
 .equation-card h4 {
@@ -265,6 +266,9 @@ h2 {
   border-radius: 6px;
   margin-bottom: 8px;
   line-height: 1.4;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .equation-card p {
