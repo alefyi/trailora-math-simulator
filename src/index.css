@@ -223,3 +223,44 @@ h2 {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
 }
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+  body {
+    align-items: flex-start;
+    padding: 12px;
+  }
+
+  .app-container {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    gap: 16px;
+  }
+
+  .sidebar {
+    width: 100%;
+    order: 2;
+    padding: 16px;
+  }
+
+  .main-stage {
+    width: 100%;
+    order: 1;
+    padding: 16px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .stat-value {
+    font-size: 1.25rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+  }
+}
