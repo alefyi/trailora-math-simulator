@@ -174,12 +174,14 @@ function App() {
           </div>
         </div>
 
-        <div className="chart-container">
+        <div className="chart-container" style={{ minHeight: '400px', width: '100%', height: '400px' }}>
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
               <XAxis 
                 dataKey="age" 
+                type="number"
+                domain={['dataMin', 'dataMax']}
                 stroke="#94a3b8" 
                 tick={{ fill: '#94a3b8', fontSize: 12 }}
                 tickMargin={10}
